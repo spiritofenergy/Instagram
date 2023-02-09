@@ -1,7 +1,6 @@
 package com.kodex.instagram.presentation
 
 import android.view.animation.OvershootInterpolator
-import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -13,8 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
-import androidx.lifecycle.AndroidViewModel
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.kodex.instagram.R
 import com.kodex.instagram.presentation.Authentication.AuthenticationViewModel
 import com.kodex.instagram.util.Screens
@@ -33,7 +34,7 @@ fun SplashScreen(navController: NavController, authViewModel: AuthenticationView
                 OvershootInterpolator(2f).getInterpolation(it)
             })
         )
-        delay(3000)
+        delay(1000)
         if(authValue){
             navController.navigate(Screens.FeedsScreen.route){
                 popUpTo(Screens.SplashScreen.route){
@@ -50,9 +51,15 @@ fun SplashScreen(navController: NavController, authViewModel: AuthenticationView
         }
     }
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()){
-        Image(painter = painterResource(id = R.drawable.title_topbar),
+        Image(painter = painterResource(id = R.drawable.title_tolbar),
             contentDescription = "splash_logo", modifier = Modifier.scale(scale.value))
     }
+}
+@Preview(showBackground = true)
+@Composable
+fun ShowSplashScreen(){
+    val authViewModel: AuthenticationViewModel
+    SplashScreen(navController = rememberNavController(), authViewModel = viewModel() )
 }
 
 

@@ -5,17 +5,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.kodex.instagram.presentation.Profile.BottomNavigationItem
 import com.kodex.instagram.presentation.Profile.BottomNavigationMenu
 
 @Composable
-fun FeedsScreen(navController: NavHostController) {
+fun SearchScreen (navController: NavController){
     Column(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = "Feeds Screen")
+            Text(text = "Search Screen")
         }
-        BottomNavigationMenu(selectedItem = BottomNavigationItem.FEED, navController = navController)
+        BottomNavigationMenu(selectedItem = BottomNavigationItem.SEARCH,
+            navController = navController)
 
     }
 }
