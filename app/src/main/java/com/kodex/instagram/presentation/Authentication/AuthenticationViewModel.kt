@@ -29,7 +29,7 @@ class AuthenticationViewModel @Inject constructor(
     private val _firebaseAuthState = mutableStateOf<Boolean>(false)
     val firebaseAuthState : State<Boolean> = _firebaseAuthState
 
-    fun signOut(){
+    fun signOut(onSuccess: () -> Unit) {
         viewModelScope.launch {
             authUseCase.firebaseSignOut().collect{
                 _signOutState.value = it
