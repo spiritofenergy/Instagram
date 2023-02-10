@@ -36,7 +36,7 @@ fun SplashScreen(navController: NavController, authViewModel: AuthenticationView
         )
         delay(1000)
         if(authValue){
-            navController.navigate(Screens.FeedsScreen.route){
+            navController.navigate(Screens.ProfileScreen.route){
                 popUpTo(Screens.SplashScreen.route){
                     inclusive = true
                 }
@@ -51,7 +51,7 @@ fun SplashScreen(navController: NavController, authViewModel: AuthenticationView
         }
     }
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()){
-        Image(painter = painterResource(id = R.drawable.title_topbar2),
+        Image(painter = painterResource(id = R.drawable.title_topbar1),
             contentDescription = "splash_logo", modifier = Modifier.scale(scale.value))
     }
 }

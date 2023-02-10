@@ -101,11 +101,11 @@ fun SignUpScreen(navController: NavHostController, viewModel: AuthenticationView
                     }
                     is Response.Success ->{
                         if (response.data){
-
-                                navController.navigate(Screens.FeedsScreen.route){
-                                    popUpTo(Screens.LoginScreen.route){
-                                        inclusive = true
-
+                                LaunchedEffect(key1 = true){
+                                    navController.navigate(Screens.ProfileScreen.route){
+                                        popUpTo(Screens.LoginScreen.route){
+                                            inclusive = true
+                                   }
                                 }
                             }
                         }

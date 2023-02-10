@@ -1,7 +1,5 @@
 package com.kodex.instagram.presentation.Authentication
 
-import android.app.Application
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import com.kodex.instagram.R
@@ -13,12 +11,12 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -28,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.kodex.instagram.domain.use_cases.AuthenticationUseCase
 import com.kodex.instagram.presentation.Profile.Toast
 import com.kodex.instagram.ui.theme.InstagramTheme
 import com.kodex.instagram.util.Response
@@ -98,9 +95,11 @@ fun LoginScreen(viewModel: AuthenticationViewModel, navController: NavHostContro
                     }
                     is Response.Success ->{
                         if (response.data){
-                            navController.navigate(Screens.FeedsScreen.route){
-                                popUpTo(Screens.LoginScreen.route){
-                                    inclusive = true
+                            LaunchedEffect(key1 = true){
+                                navController.navigate(Screens.ProfileScreen.route){
+                                    popUpTo(Screens.LoginScreen.route){
+                                        inclusive = true
+                                      }
                                 }
                             }
                         }
@@ -114,9 +113,10 @@ fun LoginScreen(viewModel: AuthenticationViewModel, navController: NavHostContro
                 }
             }
             Text(text = "New User? Sign Up ", color = Color.Blue,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier
+                .padding(8.dp)
                 .clickable {
-                    navController.navigate(route = Screens.SignUpScreen.route){
+                    navController.navigate(route = Screens.SignUpScreen.route) {
                         launchSingleTop = true
                     }
                 })

@@ -4,8 +4,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.kodex.instagram.data.AuthenticationRepositoryImpl
+import com.kodex.instagram.data.UserRepositoryImpl
 import com.kodex.instagram.domain.repository.AuthenticationRepository
+import com.kodex.instagram.domain.repository.UserRepository
 import com.kodex.instagram.domain.use_cases.*
+import com.kodex.instagram.domain.use_cases.AuthenticationUseCases.*
+import com.kodex.instagram.domain.use_cases.UserUseCases.GetUserDetails
+import com.kodex.instagram.domain.use_cases.UserUseCases.SetUserDetails
+import com.kodex.instagram.domain.use_cases.UserUseCases.UserUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,6 +53,19 @@ object InstagramModule {
         firebaseSignOut = FirebaseSignOut(repository = repository),
         firebaseSignIn = FirebaseSignIn(repository = repository),
         firebaseSingUp = FirebaseSingUp(repository = repository)
+    )
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(firebaseFirestore: FirebaseFirestore):UserRepository{
+        return UserRepositoryImpl(firebaseFirestore = firebaseFirestore)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserUseCase(repository: UserRepository) = UserUseCase(
+        getUserDetails = GetUserDetails(repository = repository),
+        setUserDetails = SetUserDetails(repository = repository)
     )
 
 

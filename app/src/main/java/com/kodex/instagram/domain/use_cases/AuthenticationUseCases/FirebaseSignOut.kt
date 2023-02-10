@@ -1,4 +1,4 @@
-package com.kodex.instagram.domain.use_cases
+package com.kodex.instagram.domain.use_cases.AuthenticationUseCases
 
 import com.kodex.instagram.domain.repository.AuthenticationRepository
 import javax.inject.Inject
