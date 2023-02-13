@@ -4,7 +4,6 @@ package com.kodex.instagram.presentation.Main
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
@@ -22,30 +21,18 @@ import coil.compose.rememberImagePainter
 
 
 import android.util.Log
-import android.util.Log.d
-import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.*
 
 //import androidx.compose.runtime.R
 //import androidx.compose.runtime.R.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.compose.material.Icon
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import com.kodex.instagram.R
 import com.kodex.instagram.domain.model.TabModel
 import com.kodex.instagram.presentation.Main.Profile.MyProfile
-import com.kodex.instagram.presentation.Main.Profile.components.ActionButton
-import com.kodex.instagram.presentation.Main.Profile.components.ProfileStats
+import com.kodex.instagram.presentation.Main.Profile.components.*
 //import androidx.compose.ui.tooling.data.EmptyGroup.data
-import com.kodex.instagram.presentation.Main.Profile.components.RoundedImage
-import com.kodex.instagram.presentation.Main.Profile.components.TabView
 import com.kodex.instagram.presentation.Profile.BottomNavigationItem
 import com.kodex.instagram.presentation.Profile.BottomNavigationMenu
 import com.kodex.instagram.presentation.Profile.Toast
@@ -149,6 +136,17 @@ fun ProfileScreen(navController: NavController) {
                                 text = "Igtv")
                          )){
                             selectedTabIndex = it
+                        }
+                        when(selectedTabIndex){
+                            0 ->
+                                PostsSelection(
+                                    posts = listOf(
+                                        painterResource(id = R.drawable.banner1),
+                                        painterResource(id = R.drawable.banner2),
+                                        painterResource(id = R.drawable.banner3),
+                                        painterResource(id = R.drawable.banner4),
+                                        painterResource(id = R.drawable.banner5),
+                                )
                         }
                     }
                 }
