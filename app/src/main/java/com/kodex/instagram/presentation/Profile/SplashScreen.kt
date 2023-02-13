@@ -51,7 +51,7 @@ fun SplashScreen(navController: NavController, authViewModel: AuthenticationView
         }
     }
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()){
-        Image(painter = painterResource(id = R.drawable.title_topbar1),
+        Image(painter = painterResource(id = R.drawable.title_topbar),
             contentDescription = "splash_logo", modifier = Modifier.scale(scale.value))
     }
 }

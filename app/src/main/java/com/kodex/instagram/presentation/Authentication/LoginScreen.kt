@@ -45,7 +45,7 @@ fun LoginScreen(viewModel: AuthenticationViewModel, navController: NavHostContro
             val emailState = remember {mutableStateOf("") }
             val passwordState = remember {mutableStateOf("") }
             Image(
-                painter = painterResource(id = R.drawable.instagram_logo),
+                painter = painterResource(id = R.drawable.title_topbar1),
                 contentDescription = "LoginScreen Logo",
             modifier = Modifier
                 .width(250.dp)
@@ -73,13 +73,13 @@ fun LoginScreen(viewModel: AuthenticationViewModel, navController: NavHostContro
                 onValueChange = {
                     passwordState.value = it
                 },
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(15.dp),
                 label = {
                     Text(text = "Enter Your Password:")
                 },
                 visualTransformation = PasswordVisualTransformation()
             )
-            Button(
+            Button(modifier = Modifier.padding(15.dp),
                 onClick = {
                 viewModel.signIn(
                     email = emailState.value,
@@ -90,7 +90,7 @@ fun LoginScreen(viewModel: AuthenticationViewModel, navController: NavHostContro
                 when(val response = viewModel.signInState.value){
                     is Response.Loading ->{
                         CircularProgressIndicator(
-                            modifier = Modifier.fillMaxSize()
+                            modifier = Modifier.padding(10.dp)
                         )
                     }
                     is Response.Success ->{
@@ -120,6 +120,39 @@ fun LoginScreen(viewModel: AuthenticationViewModel, navController: NavHostContro
                         launchSingleTop = true
                     }
                 })
+            Button(modifier = Modifier.padding(10.dp),
+                onClick = {
+                    viewModel.signIn(
+                        email = emailState.value,
+                        password = passwordState.value
+                    )
+                }) {
+                Text(text = "Google Account")
+                when(val response = viewModel.signInState.value){
+                    is Response.Loading ->{
+                        CircularProgressIndicator(
+                            modifier = Modifier.padding(10.dp)
+                        )
+                    }
+                    is Response.Success ->{
+                        if (response.data){
+                            LaunchedEffect(key1 = true){
+                                navController.navigate(Screens.ProfileScreen.route){
+                                    popUpTo(Screens.LoginScreen.route){
+                                        inclusive = true
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            Toast(message = "Sing In failed")
+                        }
+                    }
+                    is Response.Error -> {
+                        Toast(message = response.message)
+                    }
+                }
+            }
         }
     }
 }

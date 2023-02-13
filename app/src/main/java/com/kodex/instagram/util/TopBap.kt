@@ -16,8 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.kodex.instagram.presentation.Authentication.AuthenticationViewModel
-import com.kodex.instagram.util.TopBar
-import com.kodex.instagram.util.icon
 import com.kodex.instagram.R
 
 

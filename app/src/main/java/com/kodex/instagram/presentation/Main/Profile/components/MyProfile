@@ -1,0 +1,5 @@
+package com.kodex.instagram.presentation.Main.Profile.components
+
+@Composable
+fun MyProfile(){
+}
