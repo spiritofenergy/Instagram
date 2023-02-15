@@ -23,7 +23,7 @@ fun MyProfile(
     ) {
         Text(text = displayName, fontWeight = FontWeight.Bold, lineHeight = 20.sp)
         Spacer(modifier = Modifier.height(5.dp))
-        Text(text = bio, lineHeight = 30.sp)
+        Text(text = bio, lineHeight = 20.sp)
         Spacer(modifier = Modifier.height(5.dp))
         Text(text = url, color = Color(0xFF3D3D91), lineHeight = 20.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }

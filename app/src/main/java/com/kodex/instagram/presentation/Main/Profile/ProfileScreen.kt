@@ -26,8 +26,11 @@ import androidx.compose.material.*
 //import androidx.compose.runtime.R
 //import androidx.compose.runtime.R.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.kodex.instagram.R
 import com.kodex.instagram.domain.model.TabModel
 import com.kodex.instagram.presentation.Main.Profile.MyProfile
@@ -43,7 +46,6 @@ import com.kodex.instagram.util.TopBar
 fun ProfileScreen(navController: NavController) {
     val userviewmodel: UserViewModel = hiltViewModel()
     userviewmodel.getUserInfo()
-
     when (val response = userviewmodel.getUserData.value) {
         is Response.Loading -> {
             CircularProgressIndicator()
@@ -64,8 +66,19 @@ fun ProfileScreen(navController: NavController) {
                                     fontSize = 25.sp)
                             },
                             actions = {
-
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_new),
+                                    contentDescription = "Create",
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(30.dp)
+                                )
                                 Spacer(modifier = Modifier.width(10.dp))
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_hamburger),
+                                    contentDescription = "More Options",
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(30.dp)
+                                )
                             },
                             backgroundColor = Color.White,
                             elevation = 10.dp
@@ -77,12 +90,12 @@ fun ProfileScreen(navController: NavController) {
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(top = 10.dp,
-                                        start = 10.dp,
-                                        bottom = 10.dp,
-                                        end = 10.dp)
+                                    .padding(
+                                        top = 10.dp, start = 10.dp, bottom = 10.dp, end = 20.dp
+                                    )
                             ) {
-                                RoundedImage(image = rememberImagePainter(data = obj.imageUrl),
+                                RoundedImage(
+                                    image = rememberImagePainter(data = obj.imageUrl),
                                     modifier = Modifier
                                         .size(100.dp)
                                         .weight(3.5f)
@@ -96,7 +109,7 @@ fun ProfileScreen(navController: NavController) {
                                     ProfileStats(numberText = "133",
                                         text = "Posts",
                                         navController = navController)
-                                    ProfileStats(numberText = obj.followers.size.toString(),
+                                    ProfileStats(numberText = "133",
                                         text = "Followers",
                                         navController = navController)
                                     ProfileStats(numberText = obj.following.size.toString(),
@@ -116,7 +129,7 @@ fun ProfileScreen(navController: NavController) {
                             modifier = Modifier.padding(horizontal = 20.dp)
                         ) {
                             ActionButton(
-                                text = "Edin Profile",
+                                text = "Edit Profile",
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .weight(0.45f)
@@ -134,54 +147,46 @@ fun ProfileScreen(navController: NavController) {
                                 text = "Reels"),
                             TabModel(image = painterResource(id = R.drawable.ic_igtv),
                                 text = "Igtv")
-                         )){
+                        )) {
                             selectedTabIndex = it
                         }
-                        when(selectedTabIndex){
-                            0 ->
-                                PostsSelection(
+                        when (selectedTabIndex) {
+                            0 -> {
+                                PostsSection(
                                     posts = listOf(
                                         painterResource(id = R.drawable.banner1),
-                                        painterResource(id = R.drawable.banner2),
                                         painterResource(id = R.drawable.banner3),
                                         painterResource(id = R.drawable.banner4),
                                         painterResource(id = R.drawable.banner5),
+                                        painterResource(id = R.drawable.banner6),
+                                        painterResource(id = R.drawable.banner7),
+                                    ),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(5.dp)
                                 )
+                            }
+                            1 -> {
+
+                            }
+                            2 -> {
+
+                            }
                         }
                     }
+                    BottomNavigationMenu(selectedItem = BottomNavigationItem.PROFILE,
+                        navController = navController)
                 }
             }
         }
-
-        is Response.Error -> {
+        is Response.Error ->{
             Toast(message = response.message)
-            Log.d("successful", "Ошибка загрузки")
         }
     }
+}
 
-
-
-    userviewmodel.setUserInfo(
-        name = "Hobel Karl Dao",
-        userName = "Gastero 34 90",
-        bio = "Dikens 34 567",
-        websiteUrl = "https//seostor.ru"
-
-    )
-
-    Scaffold(
-        topBar = {TopBar()},
-        content = {
-            Column(modifier = Modifier.fillMaxSize()) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(text = "Profile Screen")
-                }
-                BottomNavigationMenu(selectedItem = BottomNavigationItem.PROFILE,
-                    navController = navController)
-                  }
-             }
-        )
-
-    }
-
-
+@Preview(showBackground = true)
+@Composable
+ fun ShowProfileScreen(){
+     ProfileScreen(navController = rememberNavController())
+ }

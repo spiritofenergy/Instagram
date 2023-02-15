@@ -4,11 +4,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.kodex.instagram.data.AuthenticationRepositoryImpl
+import com.kodex.instagram.data.PostRepositoryImpl
 import com.kodex.instagram.data.UserRepositoryImpl
 import com.kodex.instagram.domain.repository.AuthenticationRepository
+import com.kodex.instagram.domain.repository.PostRepository
 import com.kodex.instagram.domain.repository.UserRepository
 import com.kodex.instagram.domain.use_cases.*
 import com.kodex.instagram.domain.use_cases.AuthenticationUseCases.*
+import com.kodex.instagram.domain.use_cases.PostsUseCases.GetAllPosts
+import com.kodex.instagram.domain.use_cases.PostsUseCases.PostsUseCase
+import com.kodex.instagram.domain.use_cases.PostsUseCases.UploadPost
 import com.kodex.instagram.domain.use_cases.UserUseCases.GetUserDetails
 import com.kodex.instagram.domain.use_cases.UserUseCases.SetUserDetails
 import com.kodex.instagram.domain.use_cases.UserUseCases.UserUseCase
@@ -67,6 +72,21 @@ object InstagramModule {
         getUserDetails = GetUserDetails(repository = repository),
         setUserDetails = SetUserDetails(repository = repository)
     )
+
+    @Singleton
+    @Provides
+    fun providePostRepository(firebaseFirestore: FirebaseFirestore): PostRepository{
+        return PostRepositoryImpl(firebaseFirestore = firebaseFirestore)
+    }
+
+    @Singleton
+    @Provides
+    fun providePostUseCase(repository: PostRepository) = PostsUseCase(
+        getAllPosts = GetAllPosts(repository = repository),
+        uploadPost = UploadPost(repository = repository)
+    )
+
+
 
 
 }

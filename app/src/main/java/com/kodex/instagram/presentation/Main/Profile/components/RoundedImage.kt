@@ -22,7 +22,8 @@ fun RoundedImage(
     Image(
         painter = image,
         contentDescription ="Profile Image",
-        modifier = Modifier.aspectRatio(1f, matchHeightConstraintsFirst = true)
+        modifier = Modifier.aspectRatio(1f,
+            matchHeightConstraintsFirst = true)
             .border(
                 width = 1.dp,
                 color = Color.LightGray,

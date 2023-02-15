@@ -6,10 +6,10 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -17,14 +17,14 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PostsSelection(
-            posts: String,
-            modifier: Modifier = Modifier
-) {
+fun PostsSection(
+    posts : List<Painter>,
+    modifier : Modifier = Modifier
+){
     LazyVerticalGrid(cells = GridCells.Fixed(3),modifier=modifier.scale(1.01f)){
         items(posts.size){
             Image(
-                painter = posts[it],
+                painter=posts[it],
                 contentDescription = "Banner",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.aspectRatio(1f)
