@@ -1,5 +1,6 @@
 package com.kodex.instagram.domain.model
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -25,7 +26,10 @@ class PostViewModel @Inject constructor(
     private val _uploadPostData = mutableStateOf<Response<Boolean>>(Response.Success(false))
     val uploadPostData : MutableState<Response<Boolean>> = _uploadPostData
 
-    fun getAllPosts (userid: String) {
+    fun getAllPosts () {
+        val userid = auth.currentUser?.uid!!
+        Log.d("check", "userid :$userid")
+
         viewModelScope.launch {
             postUserUseCase.getAllPosts(userid).collect {
                 _postData.value = it

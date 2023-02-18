@@ -10,6 +10,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class PostRepositoryImpl @Inject constructor(
@@ -41,7 +42,6 @@ class PostRepositoryImpl @Inject constructor(
     }
 
     override fun uploadPost(
-        postId: String,
         postImage: String,
         postDescription: String,
         time: Long,
@@ -61,7 +61,15 @@ class PostRepositoryImpl @Inject constructor(
                 usrImage = userImage,
                 userId = userId
             )
-            firebaseFirestore.collection("posts")
+            firebaseFirestore.collection("posts").document().set(post)
+                .addOnSuccessListener {
+                    operationSuccessful = true
+                }.await()
+            if (operationSuccessful){
+                emit(Response.Success(operationSuccessful))
+            }else{
+                emit(Response.Error("Post Upload Unsuccessful"))
+            }
         }
         catch (e: Exception){
             emit(Response.Error(e.localizedMessage?:"An Unexpected error"))

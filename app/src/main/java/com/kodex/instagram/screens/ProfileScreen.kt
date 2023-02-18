@@ -183,10 +183,4 @@ fun ProfileScreen(navController: NavController) {
             Toast(message = response.message)
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
- fun ShowProfileScreen(){
-     ProfileScreen(navController = rememberNavController())
  }

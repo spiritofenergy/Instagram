@@ -36,7 +36,7 @@ fun SplashScreen(navController: NavController, authViewModel: AuthenticationView
         )
         delay(1000)
         if(authValue){
-            navController.navigate(Screens.ProfileScreen.route){
+            navController.navigate(Screens.FeedsScreen.route){
                 popUpTo(Screens.SplashScreen.route){
                     inclusive = true
                 }

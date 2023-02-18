@@ -7,8 +7,12 @@ class UploadPost @Inject constructor(
     private val repository: PostRepository
 ) {
     operator fun invoke(
-        userid : String,userName:String,userImage:String,
-        postImage : String, postDescription:String,time:Long
+        userid : String,
+        userName:String,
+        userImage:String,
+        postImage : String,
+        postDescription:String,
+        time:Long
     ) = repository.uploadPost(
         userId = userid,
         userImage = userImage,
