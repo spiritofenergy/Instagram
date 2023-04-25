@@ -1,0 +1,27 @@
+import com.vipulasri.jetinstagram.buildsrc.Libs
+
+buildscript {
+  repositories {
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+  }
+  dependencies {
+    classpath Libs.androidGradlePlugin
+    classpath Libs.Kotlin.gradlePlugin
+    classpath "com.google.dagger:hilt-android-gradle-plugin:2.45"
+    classpath 'com.android.tools.build:gradle:7.4.2'
+  }
+}
+
+allprojects {
+  repositories {
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+  }
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}

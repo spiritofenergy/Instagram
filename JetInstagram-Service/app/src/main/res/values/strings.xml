@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">JetInstagram</string>
+    <string name="image_for_upload">Фото для загрузки</string>
+</resources>
